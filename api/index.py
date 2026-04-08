@@ -7,7 +7,6 @@ from flask import Flask, jsonify
 load_dotenv(".flaskenv")
 
 from flask_cors import CORS
-from consts import MLS_TRADE_RULES, document_prefix_prompt
 
 
 MLS_ROSTER_URL = "https://stats-api.mlssoccer.com/players/seasons/MLS-SEA-0001KA/clubs/{}?per_page=100"
@@ -202,6 +201,9 @@ def get_roster():
 @app.route('/players', methods=['GET'])
 def get_players():
     conn = get_db()
+
+    print("connected to db ", conn)
+
     cur = conn.cursor()
     cur.execute("""
         SELECT
