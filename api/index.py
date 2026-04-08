@@ -35,7 +35,10 @@ def my_profile():
 MLS_GOALS_URL = "https://sportapi.mlssoccer.com/api/stats/players/competition/MLS-COM-000001/season/MLS-SEA-0001KA/order/goals/desc?pageSize=100&page={}"
 
 def get_db():
-    return psycopg2.connect(os.environ.get("DATABASE_URL"))
+    try:
+        return psycopg2.connect(os.environ.get("DATABASE_URL"))
+    except:
+        print('failed to connect to DB')
 
 def init_db():
     conn = get_db()
